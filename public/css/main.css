@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(306.71deg, #303133 9.34%, #1c1d1c 85.65%), linear-gradient(83.76deg, #99989c 3.4%, #666464 96.6%), radial-gradient(70.71% 99% at 100% 39.75%, #000000 0%, #868282 100%), radial-gradient(70.41% 100% at 50% 0%, #b8b6ae 0%, #b1b0b3 100%);
+    background-blend-mode: soft-light, difference, difference, normal;
+}
+
+canvas {
+    height: 100vh;
+    width: 100vw;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+#tokens {
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    font-size: 25pt;
+    font-family: sans-serif;
+    color: whitesmoke;
+}
+#hotbar {
+    position: absolute;
+    top: 60%;
+    left: calc(50% - 290px);
+    width: 580px;
+    height: 50px;
+    border: 1px solid whitesmoke;
+}
+.hotbar-item {
+    display: inline-block;
+    border: 1px solid whitesmoke;
+    height: 45px;
+    width: 50px;
+    margin: 1.2px;
+}
