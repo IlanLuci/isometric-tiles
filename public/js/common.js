@@ -1,10 +1,10 @@
-const gn = '#32a852';
-const be = '#4287f5';
-const gy = '#b4b8bf';
-const RE = [gy, 'rise'];
-const RK = [gn, 'rock'];
-
-const map = [
+export const ctx = document.getElementById("canvas").getContext("2d");
+export const gn = '#32a852';
+export const be = '#4287f5';
+export const gy = '#b4b8bf';
+export const RE = [gy, 'rise'];
+export const RK = [gn, 'rock'];
+export const map = [
     [gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn],
     [gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn],
     [gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn],
@@ -33,6 +33,4 @@ const map = [
     [gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn],
     [gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn],
     [gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn, gn]
-]
-
-//#6b6f77
+];

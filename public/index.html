@@ -43,10 +43,21 @@
             </div>
         </div>
         
-        <script src="js/map.js"></script>
-        <script src="js/Player.js"></script>
-        <script src="js/Block.js"></script>
-        <script src="js/World.js"></script>
-        <script src="js/main.js"></script>
+        <script type="module" src="js/World.js"></script>
+        <script type="module" src="js/common.js"></script>
+        <script type="module" src="js/Player.js"></script>
+        <script type="module" src="js/Block.js"></script>
+
+        <script type="module">
+            import {World} from './js/World.js';
+
+            const world = new World();
+            window.addEventListener('resize', (e) => {
+                world.loadBlocks();
+            });
+            window.addEventListener('keypress', (e) => {
+                world.player.move(e);
+            });
+        </script>
     </body>
 </html>
