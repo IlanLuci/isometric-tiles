@@ -6,7 +6,7 @@ export class Block {
 		this.y = y;
 
 		this.playerX = playerX;
-		this.playerY = playerY
+		this.playerY = playerY;
 
 		let blockData = map[x][y];
 
@@ -32,25 +32,25 @@ export class Block {
 	drawCube() {
 		//low to the ground cube shape
 		ctx.beginPath();
-		ctx.moveTo((this.x - this.playerX + 2) * 40, (this.y - this.playerY + 2) * 40);
-		ctx.lineTo((this.x - this.playerX + 2) * 40 - 20, (this.y - this.playerY + 2) * 40 - 20);
-		ctx.moveTo((this.x - this.playerX + 2) * 40 - 20, (this.y - this.playerY + 2) * 40 + 20);
-		ctx.lineTo((this.x - this.playerX + 2) * 40 - 20, (this.y - this.playerY + 2) * 40 - 20);
-		ctx.moveTo((this.x - this.playerX + 2) * 40 + 20, (this.y - this.playerY + 2) * 40 - 20);
-		ctx.lineTo((this.x - this.playerX + 2) * 40 - 20, (this.y - this.playerY + 2) * 40 - 20);
-		ctx.moveTo((this.x - this.playerX + 2) * 40 + 20, (this.y - this.playerY + 2) * 40 - 20);
-		ctx.lineTo((this.x - this.playerX + 2) * 40 + 20, (this.y - this.playerY + 2) * 40 + 20);
-		ctx.moveTo((this.x - this.playerX + 2) * 40 - 20, (this.y - this.playerY + 2) * 40 + 20);
-		ctx.lineTo((this.x - this.playerX + 2) * 40 + 20, (this.y - this.playerY + 2) * 40 + 20);
-		ctx.moveTo((this.x - this.playerX + 2) * 40 + 40, (this.y - this.playerY + 2) * 40 + 40);
-		ctx.lineTo((this.x - this.playerX + 2) * 40 + 20, (this.y - this.playerY + 2) * 40 + 20);
-		ctx.moveTo((this.x - this.playerX + 2) * 40 + 20, (this.y - this.playerY + 2) * 40 - 20);
-		ctx.lineTo((this.x - this.playerX + 2) * 40 + 40, (this.y - this.playerY + 2) * 40);
-		ctx.moveTo((this.x - this.playerX + 2) * 40 - 20, (this.y - this.playerY + 2) * 40 + 20);
-		ctx.lineTo((this.x - this.playerX + 2) * 40, (this.y - this.playerY + 2) * 40 + 40);
+		ctx.moveTo(this.calcOffsetX(0), this.calcOffsetY(0));
+		ctx.lineTo(this.calcOffsetX(-20), this.calcOffsetY(-20));
+		ctx.moveTo(this.calcOffsetX(-20), this.calcOffsetY(20));
+		ctx.lineTo(this.calcOffsetX(-20), this.calcOffsetY(-20));
+		ctx.moveTo(this.calcOffsetX(20), this.calcOffsetY(-20));
+		ctx.lineTo(this.calcOffsetX(-20), this.calcOffsetY(-20));
+		ctx.moveTo(this.calcOffsetX(20), this.calcOffsetY(-20));
+		ctx.lineTo(this.calcOffsetX(20), this.calcOffsetY(20));
+		ctx.moveTo(this.calcOffsetX(-20), this.calcOffsetY(20));
+		ctx.lineTo(this.calcOffsetX(20), this.calcOffsetY(20));
+		ctx.moveTo(this.calcOffsetX(40), this.calcOffsetY(40));
+		ctx.lineTo(this.calcOffsetX(20), this.calcOffsetY(20));
+		ctx.moveTo(this.calcOffsetX(20), this.calcOffsetY(-20));
+		ctx.lineTo(this.calcOffsetX(40), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(-20), this.calcOffsetY(20));
+		ctx.lineTo(this.calcOffsetX(0), this.calcOffsetY(40));
 		ctx.stroke();
 		ctx.fill();
-		ctx.fillRect((this.x - this.playerX + 2) * 40 - 20, (this.y - this.playerY + 2) * 40 - 20, 40, 40);
+		ctx.fillRect(this.calcOffsetX(-20), this.calcOffsetY(-20), 40, 40);
 	}
 	drawRock() {
 		//pyramid rock shape
@@ -94,5 +94,12 @@ export class Block {
 		region.lineTo((this.x - this.playerX + 2) * 40 - 15, (this.y - this.playerY + 2) * 40 + 5);
 
 		ctx.fill(region, 'evenodd');
+	}
+
+	calcOffsetX(x) {
+		return (this.x - this.playerX + 2) * 40 + x;
+	}
+	calcOffsetY(y) {
+		return (this.y - this.playerY + 2) * 40 + y;
 	}
 }

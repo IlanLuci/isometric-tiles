@@ -34,32 +34,35 @@ export class Player {
     }
 
     move(e) {
-        if (e.code == 'KeyW')
-        {
-            //W clicked
-            if (this.x < this.world.gridSize / 2 + 1) return;
-            this.x -= 1; 
+        switch (e.code) {
+            case 'KeyW': {
+                //W clicked
+                if (this.x < this.world.gridSize / 2 + 1) return;
+                this.x -= 1;
+                this.world.loadBlocks();
+                break;
+            }
+            case 'KeyA': {
+                //A clicked
+                if (this.y > map.length - this.world.gridSize / 2 - 1) return;
+                this.y += 1;
+                this.world.loadBlocks();
+                break;
+            }
+            case 'KeyS': {
+                //S clicked
+                if (this.x > map.length - this.world.gridSize / 2 - 1) return;
+                this.x += 1;
+                this.world.loadBlocks();
+                break;
+            }
+            case 'KeyD': {
+                //D clicked
+                if (this.y < this.world.gridSize / 2 + 1) return;
+                this.y -= 1;
+                this.world.loadBlocks();
+                break;  
+            } 
         }
-        else if (e.code == 'KeyA')
-        {
-            //A clicked
-            if (this.y > map.length - this.world.gridSize / 2 - 1) return;
-            this.y += 1;
-        }
-        else if (e.code == 'KeyS')
-        {
-            //S clicked
-            if (this.x > map.length - this.world.gridSize / 2 - 1) return;
-            this.x += 1;
-        }
-        else if (e.code == 'KeyD')
-        {
-            //D clicked
-            if (this.y < this.world.gridSize / 2 + 1) return;
-            this.y -= 1;
-        }
-        else return;
-
-        this.world.loadBlocks();
     }
 }

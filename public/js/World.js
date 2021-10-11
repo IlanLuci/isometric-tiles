@@ -11,13 +11,13 @@ export class World {
         this.player = new Player(this);
 
         this.loadBlocks();
-	}
+    }
 
     loadBlocks() {
         canvas.width = canvas.clientWidth;
         canvas.height = canvas.clientHeight;
         
-        if (map.length != map[0].length) console.log('big bad map messup', map.length, map[0].length)
+        if (map.length != map[0].length) console.log('big bad map messup', map.length, map[0].length);
 
         ctx.translate(canvas.width / 2 - this.gridSize / 2, canvas.height / 2 - this.gridSize * 35 / 2);
         ctx.scale(1, 0.5);

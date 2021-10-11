@@ -8,10 +8,6 @@ body {
 canvas {
     height: 100vh;
     width: 100vw;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: -webkit-crisp-edges;
-    image-rendering: pixelated;
-    image-rendering: crisp-edges;
 }
 
 #tokens {
@@ -26,14 +22,13 @@ canvas {
     position: absolute;
     top: 60%;
     left: calc(50% - 290px);
-    width: 580px;
-    height: 50px;
+    height: 56px;
     border: 1px solid whitesmoke;
 }
 .hotbar-item {
     display: inline-block;
     border: 1px solid whitesmoke;
     height: 45px;
-    width: 50px;
-    margin: 1.2px;
+    width: 45px;
+    margin: 4px 3px 3px 3px;
 }
