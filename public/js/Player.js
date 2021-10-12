@@ -1,4 +1,4 @@
-import {ctx, map} from './common.js';
+import {ctx, map, gridSize} from './common.js';
 
 export class Player {
     constructor(world) {
@@ -25,40 +25,38 @@ export class Player {
         }
 
         ctx.fillStyle = '#eb4034';
-        ctx.strokeStyle = '#eb4034';
 
         ctx.beginPath();
-        ctx.arc((this.world.gridSize / 2 - 5) * 40 + 20 - offset, (this.world.gridSize / 2 - 5) * 40 + 20 - offset, 5, 0, 2 * Math.PI);
+        ctx.arc((gridSize / 2 - 5) * 40 + 20 - offset, (gridSize / 2 - 5) * 40 + 20 - offset, 5, 0, 2 * Math.PI);
         ctx.fill();
-        ctx.stroke();
     }
 
     move(e) {
         switch (e.code) {
             case 'KeyW': {
                 //W clicked
-                if (this.x < this.world.gridSize / 2 + 1) return;
+                if (this.x < gridSize / 2 + 1) return;
                 this.x -= 1;
                 this.world.loadBlocks();
                 break;
             }
             case 'KeyA': {
                 //A clicked
-                if (this.y > map.length - this.world.gridSize / 2 - 1) return;
+                if (this.y > map.length - gridSize / 2 - 1) return;
                 this.y += 1;
                 this.world.loadBlocks();
                 break;
             }
             case 'KeyS': {
                 //S clicked
-                if (this.x > map.length - this.world.gridSize / 2 - 1) return;
+                if (this.x > map.length - gridSize / 2 - 1) return;
                 this.x += 1;
                 this.world.loadBlocks();
                 break;
             }
             case 'KeyD': {
                 //D clicked
-                if (this.y < this.world.gridSize / 2 + 1) return;
+                if (this.y < gridSize / 2 + 1) return;
                 this.y -= 1;
                 this.world.loadBlocks();
                 break;  

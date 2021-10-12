@@ -1,11 +1,9 @@
 import {Player} from './Player.js'
-import {ctx, map} from './common.js';
+import {ctx, map, gridSize} from './common.js';
 import {Block} from './Block.js';
 
 export class World {
 	constructor() {
-        this.gridSize = 12;
-
         this.blocks = [];
 
         this.player = new Player(this);
@@ -19,7 +17,7 @@ export class World {
         
         if (map.length != map[0].length) console.log('big bad map messup', map.length, map[0].length);
 
-        ctx.translate(canvas.width / 2 - this.gridSize / 2, canvas.height / 2 - this.gridSize * 35 / 2);
+        ctx.translate(canvas.width / 2 - gridSize / 2, canvas.height / 2 - gridSize * 35 / 2);
         ctx.scale(1, 0.5);
         ctx.rotate(45 * Math.PI / 180);
         
@@ -27,9 +25,9 @@ export class World {
 
         let counter = 0;
 
-        for (var i = this.player.x - this.gridSize / 2; i < this.player.x + this.gridSize / 2; i++) {
-            for (var j = this.player.y - this.gridSize / 2; j < this.player.y + this.gridSize / 2; j++) {
-                if (counter == this.gridSize * this.gridSize) return;
+        for (var i = this.player.x - gridSize / 2; i < this.player.x + gridSize / 2; i++) {
+            for (var j = this.player.y - gridSize / 2; j < this.player.y + gridSize / 2; j++) {
+                if (counter == gridSize * gridSize) return;
                 
                 counter += 1;
 
