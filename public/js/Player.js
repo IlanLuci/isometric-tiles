@@ -32,6 +32,7 @@ export class Player {
     }
 
     move(e) {
+        // allow moving all the way to edges of screen
         switch (e.code) {
             case 'KeyW': {
                 //W clicked

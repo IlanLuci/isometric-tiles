@@ -6,6 +6,7 @@ body {
 }
 
 canvas {
+    margin-top: 100px;
     height: 100vh;
     width: 100vw;
 }
@@ -20,9 +21,10 @@ canvas {
 }
 #hotbar {
     position: absolute;
-    top: 60%;
+    bottom: 10px;
     left: calc(50% - 290px);
     height: 56px;
+    padding: 2px 4px 2px 4px;
     border: 1px solid whitesmoke;
 }
 .hotbar-item {

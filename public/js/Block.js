@@ -1,4 +1,4 @@
-import {ctx, map} from './common.js';
+import {ctx, gridSize, map} from './common.js';
 
 export class Block {
     constructor(x, y, playerX, playerY) {
@@ -11,11 +11,11 @@ export class Block {
 		let blockData = map[x][y];
 
 		if (typeof blockData == 'string') {
-			ctx.fillStyle = blockData;
-
-			ctx.fillRect((x - playerX + 2) * 40, (y - playerY + 2) * 40, 40, 40);
+			this.drawTile((x - playerX + 2) * 40, (y - playerY + 2) * 40, 40, 40, 20, blockData);
+			//ctx.fillRect((x - playerX + 2) * 40, (y - playerY + 2) * 40, 40, 40);
 		}
 
+		/*
 		else if (typeof blockData == 'object') {
 			ctx.fillStyle = blockData[0];
 
@@ -27,79 +27,63 @@ export class Block {
 				this.drawRock();
 			}
 		}
+		*/
     }
 
-	drawCube() {
-		//low to the ground cube shape
+	drawTile(x, y, wx, wy, h, color) {
+		ctx.fillStyle = color;
+
 		ctx.beginPath();
-		ctx.moveTo(this.calcOffsetX(0), this.calcOffsetY(0));
-		ctx.lineTo(this.calcOffsetX(-20), this.calcOffsetY(-20));
-		ctx.moveTo(this.calcOffsetX(-20), this.calcOffsetY(20));
-		ctx.lineTo(this.calcOffsetX(-20), this.calcOffsetY(-20));
-		ctx.moveTo(this.calcOffsetX(20), this.calcOffsetY(-20));
-		ctx.lineTo(this.calcOffsetX(-20), this.calcOffsetY(-20));
-		ctx.moveTo(this.calcOffsetX(20), this.calcOffsetY(-20));
-		ctx.lineTo(this.calcOffsetX(20), this.calcOffsetY(20));
-		ctx.moveTo(this.calcOffsetX(-20), this.calcOffsetY(20));
-		ctx.lineTo(this.calcOffsetX(20), this.calcOffsetY(20));
-		ctx.moveTo(this.calcOffsetX(40), this.calcOffsetY(40));
-		ctx.lineTo(this.calcOffsetX(20), this.calcOffsetY(20));
-		ctx.moveTo(this.calcOffsetX(20), this.calcOffsetY(-20));
-		ctx.lineTo(this.calcOffsetX(40), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(-20), this.calcOffsetY(20));
-		ctx.lineTo(this.calcOffsetX(0), this.calcOffsetY(40));
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
+		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+
 		ctx.stroke();
 		ctx.fill();
-		ctx.fillRect(this.calcOffsetX(-20), this.calcOffsetY(-20), 40, 40);
-	}
-	drawRock() {
-		//pyramid rock shape
-		ctx.beginPath();
-		//ctx.moveTo((this.x - this.playerX + 2) * 40, (this.y - this.playerY + 2) * 40);
-		//ctx.lineTo((this.x - this.playerX + 2) * 40 - 15, (this.y - this.playerY + 2) * 40 - 15);
-		
-		
-		ctx.stroke();
 
-		ctx.fill();
+		ctx.fillRect(this.calcOffsetX(), this.calcOffsetY(), wx, wy);
 
-		// top
-		let region = new Path2D();
-		region.moveTo((this.x - this.playerX + 2) * 40 - 15, (this.y - this.playerY + 2) * 40 + 5);
-		region.lineTo((this.x - this.playerX + 2) * 40 - 15, (this.y - this.playerY + 2) * 40 - 15);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 5, (this.y - this.playerY + 2) * 40 - 15);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 5, (this.y - this.playerY + 2) * 40 + 5);
-		region.lineTo((this.x - this.playerX + 2) * 40 - 15, (this.y - this.playerY + 2) * 40 + 5);
-		region.closePath();
+		let isVeryBottom = this.x == this.playerX + (gridSize / 2) - 1 && this.y == this.playerY + (gridSize / 2) - 1;
+		if (this.x == this.playerX + (gridSize / 2) - 1) {
+			ctx.beginPath();
+			ctx.moveTo(this.calcOffsetX() + wx, this.calcOffsetY());
+			ctx.lineTo(this.calcOffsetX() + wx + h, this.calcOffsetY() + h);
+			ctx.lineTo(this.calcOffsetX() + wx + h, this.calcOffsetY() + wy + h);
+			ctx.lineTo(this.calcOffsetX() + wx, this.calcOffsetY() + wy + h);
 
-		ctx.fillStyle = '#b4b8bf';
-		ctx.fill(region, 'evenodd');
+			ctx.stroke();
+			ctx.fill();
+		}
+		if (this.y == this.playerY + (gridSize / 2) - 1) {
+			ctx.beginPath();
+			ctx.moveTo(this.calcOffsetX(), this.calcOffsetY() + wy);
+			ctx.lineTo(this.calcOffsetX() + h, this.calcOffsetY() + wx + h);
+			ctx.lineTo(this.calcOffsetX() + wx + h, this.calcOffsetY() + h + wy);
+			ctx.lineTo(this.calcOffsetX() + wx, this.calcOffsetY() + wy);
 
-		// side 1
-		region = new Path2D();
-		region.moveTo((this.x - this.playerX + 2) * 40 + 40, (this.y - this.playerY + 2) * 40 + 40);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 5, (this.y - this.playerY + 2) * 40 + 5);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 5, (this.y - this.playerY + 2) * 40 - 15);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 40, (this.y - this.playerY + 2) * 40);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 40, (this.y - this.playerY + 2) * 40 + 40);
-
-		ctx.fill(region, 'evenodd');
-
-		// side 1
-		region = new Path2D();
-		region.moveTo((this.x - this.playerX + 2) * 40 - 15, (this.y - this.playerY + 2) * 40 + 5);
-		region.lineTo((this.x - this.playerX + 2) * 40, (this.y - this.playerY + 2) * 40 + 40);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 5, (this.y - this.playerY + 2) * 40 - 15);
-		region.lineTo((this.x - this.playerX + 2) * 40 + 5, (this.y - this.playerY + 2) * 40 - 15);
-		region.lineTo((this.x - this.playerX + 2) * 40 - 15, (this.y - this.playerY + 2) * 40 + 5);
-
-		ctx.fill(region, 'evenodd');
+			ctx.stroke();
+			ctx.fill();
+		}
 	}
 
-	calcOffsetX(x) {
-		return (this.x - this.playerX + 2) * 40 + x;
+	//prob replace these in the future... not needed, not sure why I made these
+	calcOffsetX() {
+		return (this.x - this.playerX + 2) * 40;
 	}
-	calcOffsetY(y) {
-		return (this.y - this.playerY + 2) * 40 + y;
+	calcOffsetY() {
+		return (this.y - this.playerY + 2) * 40;
 	}
 }
