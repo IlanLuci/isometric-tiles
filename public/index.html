@@ -8,39 +8,17 @@
     <body>
         <canvas id="canvas"></canvas>
 
-        <div id="tokens"></div>
-
         <div id="hotbar">
-            <div class="hotbar-item">
-
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
-            <div class="hotbar-item">
-                
-            </div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
+            <div class="hotbar-item"></div>
         </div>
         
         <script type="module" src="js/World.js"></script>
@@ -52,9 +30,11 @@
             import {World} from './js/World.js';
 
             const world = new World();
+
             window.addEventListener('resize', (e) => {
                 world.loadBlocks();
             });
+            
             window.addEventListener('keypress', (e) => {
                 world.player.move(e);
             });

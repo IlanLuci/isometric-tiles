@@ -1,4 +1,4 @@
-import {ctx, gridSize, map} from './common.js';
+import {ctx, map, tileSize} from './common.js';
 
 export class Block {
     constructor(x, y, playerX, playerY) {
@@ -10,80 +10,49 @@ export class Block {
 
 		let blockData = map[x][y];
 
-		if (typeof blockData == 'string') {
-			this.drawTile((x - playerX + 2) * 40, (y - playerY + 2) * 40, 40, 40, 20, blockData);
-			//ctx.fillRect((x - playerX + 2) * 40, (y - playerY + 2) * 40, 40, 40);
-		}
-
-		/*
-		else if (typeof blockData == 'object') {
-			ctx.fillStyle = blockData[0];
-
-			ctx.fillRect((x - playerX + 2) * 40, (y - playerY + 2) * 40, 40, 40);
-
-			if (blockData[1] == 'rise') {
-				this.drawCube();
-			} else if (blockData[1] == 'rock') {
-				this.drawRock();
-			}
-		}
-		*/
+		this.drawTile(blockData);
     }
 
-	drawTile(x, y, wx, wy, h, color) {
+	drawTile(color) {
+		if (!color) return;
+
+		// set fill color for tile
 		ctx.fillStyle = color;
 
-		ctx.beginPath();
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.moveTo(this.calcOffsetX(), this.calcOffsetY());
-		ctx.lineTo(this.calcOffsetX(), this.calcOffsetY());
+		// set width of lines
+		ctx.lineWidth = 0.1;
 
-		ctx.stroke();
-		ctx.fill();
+		// fill in block with color
+		ctx.fillRect(this.calcOffsetX(), this.calcOffsetY(), tileSize, tileSize);
 
-		ctx.fillRect(this.calcOffsetX(), this.calcOffsetY(), wx, wy);
-
-		let isVeryBottom = this.x == this.playerX + (gridSize / 2) - 1 && this.y == this.playerY + (gridSize / 2) - 1;
-		if (this.x == this.playerX + (gridSize / 2) - 1) {
-			ctx.beginPath();
-			ctx.moveTo(this.calcOffsetX() + wx, this.calcOffsetY());
-			ctx.lineTo(this.calcOffsetX() + wx + h, this.calcOffsetY() + h);
-			ctx.lineTo(this.calcOffsetX() + wx + h, this.calcOffsetY() + wy + h);
-			ctx.lineTo(this.calcOffsetX() + wx, this.calcOffsetY() + wy + h);
+		//add 3d effect to blocks in front (show sides)
+		if (!map[this.x + 1]) {
+			// right bottom side
+			ctx.moveTo(this.calcOffsetX() + tileSize, this.calcOffsetY());
+			ctx.lineTo(this.calcOffsetX() + tileSize + tileSize, this.calcOffsetY() + tileSize);
+			ctx.lineTo(this.calcOffsetX() + tileSize + tileSize, this.calcOffsetY() + tileSize + tileSize);
+			ctx.lineTo(this.calcOffsetX() + tileSize, this.calcOffsetY() + tileSize);
 
 			ctx.stroke();
 			ctx.fill();
 		}
-		if (this.y == this.playerY + (gridSize / 2) - 1) {
-			ctx.beginPath();
-			ctx.moveTo(this.calcOffsetX(), this.calcOffsetY() + wy);
-			ctx.lineTo(this.calcOffsetX() + h, this.calcOffsetY() + wx + h);
-			ctx.lineTo(this.calcOffsetX() + wx + h, this.calcOffsetY() + h + wy);
-			ctx.lineTo(this.calcOffsetX() + wx, this.calcOffsetY() + wy);
+
+		if (!map[this.x][this.y + 1]) {
+			// left bottom side
+			ctx.moveTo(this.calcOffsetX(), this.calcOffsetY() + tileSize);
+			ctx.lineTo(this.calcOffsetX() + tileSize, this.calcOffsetY() + tileSize + tileSize);
+			ctx.lineTo(this.calcOffsetX() + tileSize + tileSize, this.calcOffsetY() + tileSize + tileSize);
+			ctx.lineTo(this.calcOffsetX() + tileSize, this.calcOffsetY() + tileSize);
 
 			ctx.stroke();
 			ctx.fill();
 		}
 	}
 
-	//prob replace these in the future... not needed, not sure why I made these
 	calcOffsetX() {
-		return (this.x - this.playerX + 2) * 40;
+		return (this.x - this.playerX + 2) * tileSize;
 	}
 	calcOffsetY() {
-		return (this.y - this.playerY + 2) * 40;
+		return (this.y - this.playerY + 2) * tileSize;
 	}
 }

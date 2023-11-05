@@ -11,14 +11,6 @@ canvas {
     width: 100vw;
 }
 
-#tokens {
-    position: fixed;
-    top: 5px;
-    left: 5px;
-    font-size: 25pt;
-    font-family: sans-serif;
-    color: whitesmoke;
-}
 #hotbar {
     position: absolute;
     bottom: 10px;
